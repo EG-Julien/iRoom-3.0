@@ -9,4 +9,12 @@ class HomeCtrl extends Controller {
     public function Home($request, $response) {
         $this->render($response, "Home.twig");
     }
+
+    public function Lights($request, $response, $args) {
+        if ($args["state"] == "on") {
+            shell_exec("../Python/Script.py light on");
+        } else {
+            shell_exec("../Python/Script.py light off");
+        }
+    }
 }

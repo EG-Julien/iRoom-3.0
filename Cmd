@@ -1,1 +1,6 @@
+TODO : NOTA
+
+Ne pas mettre de point en fin de phrase !
+
+
 "Allume la lumière" => http://82.235.255.99:3000/set/light/on
