@@ -12,9 +12,9 @@ class HomeCtrl extends Controller {
 
     public function Lights($request, $response, $args) {
         if ($args["state"] == "on") {
-            shell_exec("../Python/Script.py light on");
+            shell_exec("sudo python ../Python/Script.py light on");
         } else {
-            shell_exec("../Python/Script.py light off");
+            shell_exec("sudo python ../Python/Script.py light off");
         }
     }
 }

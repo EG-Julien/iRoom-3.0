@@ -4,7 +4,7 @@ import sys
 
 # configure the serial connections (the parameters differs on the device you are connecting to)
 ser = serial.Serial(
-    port='/dev/ttyUSB1',
+    port='/dev/ttyUSB0',
     baudrate=115200
 )
 
@@ -15,6 +15,8 @@ state = sys.argv[2]
 
 if (cmd == "light"):
     if (state == "on"):
-        ser.write("LAMP_ON\n")
+        print "on"
+        ser.write("LAMP_ON\r\n")
     else:
-        ser.write("LAMP_OFF\n")
+        print "off"
+        ser.write("LAMP_OFF\r\n")
