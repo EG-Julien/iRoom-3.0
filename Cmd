@@ -1,0 +1,1 @@
+"Allume la lumière" => http://82.235.255.99:3000/set/light/on
