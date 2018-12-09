@@ -11,12 +11,4 @@ ser = serial.Serial(
 ser.isOpen()
 
 cmd = sys.argv[1]
-state = sys.argv[2]
-
-if (cmd == "light"):
-    if (state == "on"):
-        print "on"
-        ser.write("LAMP_ON\r\n")
-    else:
-        print "off"
-        ser.write("LAMP_OFF\r\n")
+    ser.write(cmd + "\r\n")
