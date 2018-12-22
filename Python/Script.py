@@ -11,4 +11,5 @@ ser = serial.Serial(
 ser.isOpen()
 
 cmd = sys.argv[1]
-ser.write(cmd +"\r\n")
+ser.write(cmd)
+ser.write("\r\n")

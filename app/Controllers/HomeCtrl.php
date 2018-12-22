@@ -13,4 +13,8 @@ class HomeCtrl extends Controller {
     public function Lights($request, $response, $args) {
         shell_exec("sudo python ../Python/Script.py " . $args['cmd'] . "");
     }
+
+    public function Computer($request, $response, $args) {
+    	shell_exec("sudo etherwake -i wlan0 " . $args['cmd'] . "");
+    }
 }
