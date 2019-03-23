@@ -15,7 +15,7 @@ class Controller {
 
     public function render($response, $name, $params = []) {
         $this->container->view->render($response, $name, $params);
-    }
+    }/*
 
     static function setDB($DB) {
         self::$DB = $DB;
@@ -23,5 +23,5 @@ class Controller {
 
     static function getDB() {
         return self::$DB;
-    }
+    }*/
 }
