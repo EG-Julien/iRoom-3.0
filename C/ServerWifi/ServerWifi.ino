@@ -6,7 +6,7 @@
 #include <stdio.h>
 
 #define DEBUG 1
-#define END_CHAR '/'
+#define END_CHAR '\n'
 #define ID 0
 
 const char *ssid = "iServer 3.0";
@@ -14,7 +14,6 @@ const char *password = "FwNrUjp-+Pe3pjdehDcdSpy8mpQaS";
 String cmd_serial = "";
 
 ESP8266WebServer server(80);
-HTTPClient http;
 
 IPAddress staticIP(192,168,1,255);
 IPAddress gateway(192,168,1,255);
@@ -24,6 +23,7 @@ void handleRoot();
 void handleNotFound();
 void executeCommand(String command);
 int dumpClients(String ips[50]);
+void sendData(String ip, String url);
 
 void setup() {
     delay(1000);
@@ -137,7 +137,7 @@ void handleRoot() {
 }
 
 void executeCommand(String command) {
-    char deviceID[30];
+    int deviceID;
     char socket[80];
 
     int buffer_l = command.length() + 1;
@@ -145,19 +145,57 @@ void executeCommand(String command) {
 
     command.toCharArray(buffer, buffer_l);
 
-    sscanf(buffer, "deviceID=%s&cmd=%s", deviceID, socket);
+    sscanf(buffer, "deviceID=%i&cmd=%s", &deviceID, socket);
 
     String url = "/setData?deviceID=";
         url += deviceID;
         url += "&command=";
         url += socket;
 
+    Serial.println(url);
+
     String ips[50];
     int k = dumpClients(ips);
 
     for(int i = 1; i < k; i++) {
         String host = ips[i];
-        http.begin(host, 80, url);    
+        sendData(host, url);    
     }
     
+}
+
+void sendData(String ip, String url) {
+
+    ip += url;
+
+    WiFiClient client;
+    HTTPClient http;
+
+    Serial.print("[HTTP] begin...\n");
+    Serial.print("[HTTP] URL :: http://");
+    Serial.println(ip);
+
+    if (http.begin(client, "http://" + ip)) {
+
+
+      Serial.print("[HTTP] GET...\n");
+
+      int httpCode = http.GET();
+
+      if (httpCode > 0) {
+        
+        Serial.printf("[HTTP] GET... code: %d\n", httpCode);
+
+        if (httpCode == HTTP_CODE_OK || httpCode == HTTP_CODE_MOVED_PERMANENTLY) {
+          String payload = http.getString();
+          Serial.println(payload);
+        }
+      } else {
+        Serial.printf("[HTTP] GET... failed, error: %s\n", http.errorToString(httpCode).c_str());
+      }
+
+      http.end();
+    } else {
+      Serial.printf("[HTTP] Unable to connect\n");
+    }
 }

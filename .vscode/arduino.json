@@ -1,7 +1,6 @@
 {
-    "board": "esp8266:esp8266:generic",
-    "configuration": "xtal=80,vt=flash,exception=disabled,ResetMethod=ck,CrystalFreq=26,FlashFreq=40,FlashMode=dio,eesz=512K,led=2,ip=lm2f,dbg=Disabled,lvl=None____,wipe=none,baud=115200",
-    "sketch": "C\\ClientWifi\\ClientWifi.ino",
+    "board": "arduino:avr:uno",
+    "sketch": "C\\iLight\\iLight.ino",
     "port": "COM8",
     "programmer": "AVRISP mkII"
 }

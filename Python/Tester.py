@@ -12,4 +12,4 @@ ser.isOpen()
 
 cmd = sys.argv[1]
 ser.write(cmd)
-ser.write("\r\n")
+ser.write("\n\r")
