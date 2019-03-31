@@ -49,3 +49,8 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+
+#IDE
+
+.vscode/*.*
+.idea/*.*
