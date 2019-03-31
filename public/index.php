@@ -27,7 +27,7 @@ try {
 //\App\Controllers\Controller::setDB($DB);
 
 $app->get('/', \App\Controllers\HomeCtrl::class . ':Home');
-$app->get('/set/light/{cmd}', \App\Controllers\HomeCtrl::class . ':Lights');
+$app->get('/set/light/{deviceID}/{command}', \App\Controllers\HomeCtrl::class . ':Lights');
 $app->get('/set/computer/{cmd}', \App\Controllers\HomeCtrl::class . ':Computer');
 
 $app->run();

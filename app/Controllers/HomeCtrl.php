@@ -10,10 +10,11 @@ class HomeCtrl extends Controller {
         $this->render($response, "Home.twig");
     }
 
-    public function Lights($request, $response, $args) {
-        shell_exec("sudo python ../Python/Tester.py " . $args['cmd'] . "");
+    public function Lights($request, $response, $args) { // deviceID=1&cmd=LAMP_ON
+        var_dump($args);
+        shell_exec("sudo python ../Python/Tester.py \"deviceID=" . $args['deviceID'] . "&cmd=" . $args['command'] . "\"");
         sleep(1);
-        shell_exec("sudo python ../Python/Tester.py " . $args['cmd'] . "");
+        shell_exec("sudo python ../Python/Tester.py \"deviceID=" . $args['deviceID'] . "&cmd=" . $args['command'] . "\"");
     }
 
     public function Computer($request, $response, $args) {
