@@ -9,7 +9,7 @@
 #define END_CHAR '/'
 #define ID 1
 
-#define SERVER "192.168.4.1"
+String SERVER = "192.168.4.1";
 
 const char *ssid = "iServer 3.0";
 const char *password = "FwNrUjp-+Pe3pjdehDcdSpy8mpQaS";
@@ -131,6 +131,42 @@ void executeCommand(String command) {
         url += "&command=";
         url += socket;
 
-        http.begin(SERVER, 80, url);   
+        sendData(SERVER, url);  
     
+}
+
+void sendData(String ip, String url) {
+
+    ip += url;
+
+    WiFiClient client;
+    HTTPClient http;
+
+    Serial.print("[HTTP] begin...\n");
+    Serial.print("[HTTP] URL :: http://");
+    Serial.println(ip);
+
+    if (http.begin(client, "http://" + ip)) {
+
+
+      Serial.print("[HTTP] GET...\n");
+
+      int httpCode = http.GET();
+
+      if (httpCode > 0) {
+        
+        Serial.printf("[HTTP] GET... code: %d\n", httpCode);
+
+        if (httpCode == HTTP_CODE_OK || httpCode == HTTP_CODE_MOVED_PERMANENTLY) {
+          String payload = http.getString();
+          Serial.println(payload);
+        }
+      } else {
+        Serial.printf("[HTTP] GET... failed, error: %s\n", http.errorToString(httpCode).c_str());
+      }
+
+      http.end();
+    } else {
+      Serial.printf("[HTTP] Unable to connect\n");
+    }
 }

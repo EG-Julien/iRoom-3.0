@@ -11,9 +11,9 @@ class HomeCtrl extends Controller {
     }
 
     public function Lights($request, $response, $args) {
-        shell_exec("sudo python ../Python/Script.py " . $args['cmd'] . "");
+        shell_exec("sudo python ../Python/Tester.py " . $args['cmd'] . "");
         sleep(1);
-        shell_exec("sudo python ../Python/Script.py " . $args['cmd'] . "");
+        shell_exec("sudo python ../Python/Tester.py " . $args['cmd'] . "");
     }
 
     public function Computer($request, $response, $args) {
