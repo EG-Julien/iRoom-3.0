@@ -1,6 +1,6 @@
 {
     "board": "arduino:avr:uno",
-    "sketch": "C\\iLight\\iLight.ino",
+    "sketch": "C\\iDesk\\iDesk.ino",
     "port": "COM8",
     "programmer": "AVRISP mkII"
 }
